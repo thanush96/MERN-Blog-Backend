@@ -5,7 +5,7 @@ const cors=require('cors');
 require('dotenv').config();
 
 const app=express();
-const port=process.env.PORT || 8080;
+const port=process.env.PORT || 8090;
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +21,9 @@ const connection=mongoose.connection;
 connection.once("open",() => 
 console.log("MongoDB connection established successfully!")
 );
+
+const articleRouter = require("./routes/articles");
+app.use("/articles", articleRouter);
 
 app.listen(port,()=>
 console.log(`The app is running on Port:${port}`)
