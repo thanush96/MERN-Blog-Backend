@@ -10,4 +10,18 @@ router.get("/",(req, res)=>{
     .catch(err=>res.status(400).json(`Error: ${err}`));
 });
 
+//Request add new articles
+router.post("/add", (req, res) =>{
+    const newArticle=new Articles({
+        title: req.body.title,
+        article: req.body.article,
+        authorname: req.body.authorname
+    });
+    
+    newArticle
+    .save()
+    .then(()=>res.json("The new article posted successfully!"))
+    .catch(err=>res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router ;
